@@ -1,0 +1,16 @@
+{
+  "name": "cafeteria",
+  "version": "1.0.0",
+  "description": "Esta sera un servicio API rest para el manejo de la informacion de una cafeteria",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.16"
+  }
+}
