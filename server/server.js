@@ -11,8 +11,10 @@ app.use(bodyParser.json())
 
 //SE IMPORTAN LAS RUTAS 
 
-app.use(require('../routes/categorias/categorias'))
+app.use(require('../routes/categorias/categorias'));
 app.use(require('../routes/productos/productos'));
+app.use(require('../routes/usuarios/usuarios'));
+app.use(require('../routes/login/login'));
 
 
 //IMPORTACION DE LA CONFIGURACION

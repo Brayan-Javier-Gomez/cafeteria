@@ -1,13 +1,17 @@
 const express = require('express');
 const app = express();
 
+const { autenticaRole, autenticaToken } = require('../../middelwares/autenticaciones')
+
 
 
 const ModelCategoria = require('../../model/categorias');
 
+
 app.get('/categoria', (req, res) => {
 
     ModelCategoria.find({})
+        .populate('usuario', 'nombre email')
         .sort('nombre')
         .exec((err, categorias) => {
             if (err) {
@@ -39,12 +43,19 @@ app.get('/categoria', (req, res) => {
 
 });
 
-app.post('/categoria', (req, res) => {
+app.post('/categoria', [autenticaToken, autenticaRole], (req, res) => {
+
+
 
     let body = req.body;
+
+    console.log(req.usuario._id);
+
+
     // console.log(body);
     const categoria = new ModelCategoria({
-        nombre: body.nombre
+        nombre: body.nombre,
+        usuario: req.usuario._id
     })
 
     categoria.save((err, categoriaDB) => {

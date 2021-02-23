@@ -4,11 +4,19 @@ const app = express();
 
 const ModelProducto = require('../../model/productos');
 const ModelCategoria = require('../../model/categorias');
+const { autenticaRole, autenticaToken } = require('../../middelwares/autenticaciones');
 
 app.get('/producto', (req, res) => {
     ModelProducto.find({})
+        .populate({
+            path: 'categoria',
+            populate: {
+                path: 'usuario',
+                // select: 'nombre, email'
+            }
+        })
 
-    .populate('categoria')
+
 
     .exec((err, productoDB) => {
         if (err) {
@@ -36,9 +44,9 @@ app.get('/producto', (req, res) => {
 
 });
 
-app.post('/producto', (req, res) => {
+app.post('/producto', [autenticaToken, autenticaRole], (req, res) => {
     let body = req.body;
-    console.log(body.categoria);
+
     let id_categoria;
 
     if (body.categoria === undefined) {
@@ -50,6 +58,16 @@ app.post('/producto', (req, res) => {
     }
 
     ModelCategoria.find({ nombre: body.categoria }, (err, categoriaID) => {
+        // console.log(categoriaID[0].id);
+        if (!categoriaID[0].id) {
+            return res.json({
+                ok: false,
+                err: {
+                    message: 'La categoria especificada no ha sido encontrada'
+                }
+            })
+        }
+
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -59,12 +77,19 @@ app.post('/producto', (req, res) => {
             })
         }
 
+
         if (!categoriaID) {
             return res.status(404).json({
                 ok: false,
-                err
+                err: {
+                    message: 'La categoria no viene'
+                }
             })
         }
+
+
+
+
 
         if (categoriaID) {
             id_categoria = categoriaID[0].id
@@ -72,13 +97,16 @@ app.post('/producto', (req, res) => {
             const producto = new ModelProducto({
                 nombre: body.nombre,
                 precio: body.precio,
+                descripcion: body.descripcion,
                 categoria: id_categoria
             })
             producto.save((err, productoDB) => {
                 if (err) {
                     return res.status(400).json({
                         ok: false,
-                        err
+                        err: {
+                            message: 'Ya existe un producto con el mismo nombre'
+                        }
                     })
                 };
                 if (!productoDB) {
