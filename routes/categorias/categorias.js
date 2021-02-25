@@ -10,7 +10,15 @@ const ModelCategoria = require('../../model/categorias');
 app.get('/', (req, res) => {
     res.json({
         ok: true,
-        message: 'El servicio de API rest se ha iniciado correctamente, las rutas permitidas son [usuarios, categorias y productos]'
+        status: 200,
+        message: 'El servicio de API rest se ha iniciado correctamente',
+        rutas: {
+            usuarios: 'https://hitman-rest-server.herokuapp.com/usuario',
+            categorias: 'https://hitman-rest-server.herokuapp.com/categoria',
+            productos: 'https://hitman-rest-server.herokuapp.com/producto'
+        }
+
+
     })
 })
 
