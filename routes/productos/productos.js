@@ -12,9 +12,10 @@ app.get('/producto', (req, res) => {
             path: 'categoria',
             populate: {
                 path: 'usuario',
-                // select: 'nombre, email'
+                select: 'nombre, email'
             }
         })
+        .populate('usuario', 'role nombre email')
 
 
 
@@ -45,6 +46,8 @@ app.get('/producto', (req, res) => {
 });
 
 app.post('/producto', [autenticaToken, autenticaRole], (req, res) => {
+    let id_usuario = req.usuario._id;
+
     let body = req.body;
 
     let id_categoria;
@@ -98,7 +101,8 @@ app.post('/producto', [autenticaToken, autenticaRole], (req, res) => {
                 nombre: body.nombre,
                 precio: body.precio,
                 descripcion: body.descripcion,
-                categoria: id_categoria
+                categoria: id_categoria,
+                usuario: id_usuario,
             })
             producto.save((err, productoDB) => {
                 if (err) {

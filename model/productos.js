@@ -21,7 +21,13 @@ const ProductoShema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Categoria',
         required: true
+    },
+    usuario: {
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario',
+        required: true
     }
+
 })
 ProductoShema.plugin(uniqueValidator, { message: '{PATH} debe ser unico' });
 module.exports = mongoose.model('Producto', ProductoShema);
