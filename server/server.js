@@ -2,6 +2,11 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
+
+
+//habilitacion del cors para peticiones de otros dominios
+app.use(cors());
 
 //SE DEBEN IMPORTAR EL BODY-PARSER PARA QUE EN LAS RUTAS FUNCIONE EL JSON Y RESPONDA    
 
