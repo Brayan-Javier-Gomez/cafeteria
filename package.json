@@ -1,20 +1,21 @@
 {
-  "name": "cafeteria",
-  "version": "1.0.0",
-  "description": "Esta sera un servicio API rest para el manejo de la informacion de una cafeteria",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.0.0",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.16",
-    "mongoose-autopopulate": "^0.12.3",
-    "mongoose-unique-validator": "^2.0.3"
-  }
+    "name": "cafeteria",
+    "version": "1.0.0",
+    "description": "Esta sera un servicio API rest para el manejo de la informacion de una cafeteria",
+    "main": "index.js",
+    "scripts": {
+        "start": "node server/server",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.0",
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.11.16",
+        "mongoose-autopopulate": "^0.12.3",
+        "mongoose-unique-validator": "^2.0.3"
+    }
 }

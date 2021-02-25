@@ -18,12 +18,7 @@ app.use(require('../routes/login/login'));
 
 
 //index
-app.get('/', (req, res) => {
-    res.json({
-        ok: true,
-        message: 'El servicio de API rest se ha iniciado correctamente, las rutas permitidas son [usuarios, categorias y productos]'
-    })
-})
+
 
 //IMPORTACION DE LA CONFIGURACION
 require('./config')
